@@ -3,7 +3,7 @@ import { UserOutlined, HomeOutlined, SettingOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import SidebarStyled from './SidebarStyled';
 
-const Sidebar = ({ collapsed, index, loggedInUserId }) => (
+const Sidebar = ({ collapsed, index, loggedInUserId, toggle }) => (
   <SidebarStyled collapsed={collapsed}>
     <Layout.Sider
       trigger={null}
@@ -17,7 +17,9 @@ const Sidebar = ({ collapsed, index, loggedInUserId }) => (
       // }}
     >
       <div className="logo">
-        <Typography.Title level={2}>Admin Panel</Typography.Title>
+        <Typography.Title level={2} onClick={toggle}>
+          Admin Panel
+        </Typography.Title>
       </div>
       <Menu
         theme="dark"

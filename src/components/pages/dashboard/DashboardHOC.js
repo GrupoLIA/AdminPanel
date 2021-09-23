@@ -38,14 +38,11 @@ const DashboardHOC = (Component) => {
       <Layout style={{ minHeight: '100vh' }}>
         <Sidebar
           collapsed={collapsed}
+          toggle={handleSetCollapsed}
           loggedInUserId={loggedInUser ? loggedInUser._id : null}
         />
         <Layout className="site-layout">
-          <PageHeader
-            history={props.history}
-            collapsed={collapsed}
-            toggle={handleSetCollapsed}
-          />
+          <PageHeader history={props.history} />
           <div className="container">
             <Component {...props} />
           </div>

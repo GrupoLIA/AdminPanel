@@ -3,13 +3,9 @@ import { Layout, Menu, Dropdown, Typography } from 'antd';
 import { UserContext } from '../../../contexts/user/userContext';
 import HeaderStyled from './HeaderStyled';
 import Avatar from 'antd/lib/avatar/avatar';
-import {
-  UserOutlined,
-  ArrowLeftOutlined,
-  ArrowRightOutlined,
-} from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
 
-const PageHeader = ({ collapsed, toggle, history }) => {
+const PageHeader = ({ history }) => {
   const { state } = useContext(UserContext);
   const { me } = state;
 
@@ -29,11 +25,6 @@ const PageHeader = ({ collapsed, toggle, history }) => {
   return (
     <HeaderStyled>
       <Layout.Header className="site-layout-background d-flex">
-        {collapsed ? (
-          <ArrowLeftOutlined className="trigger" onClick={toggle} />
-        ) : (
-          <ArrowRightOutlined className="trigger" onClick={toggle} />
-        )}
         <div className="mr-5 mx-auto">
           <div className="name-header mx-3">
             <Dropdown overlay={menu}>
