@@ -38,9 +38,7 @@ const UserProvider = ({ children }) => {
     } catch (error) {
       dispatch({
         type: types.USER_FAILURE,
-        payload: error.isAxiosError
-          ? error.message
-          : error.response.error.message,
+        payload: error.response.data,
       });
     }
   }, []);
@@ -109,7 +107,6 @@ const UserProvider = ({ children }) => {
     });
 
     try {
-      console.log('Data is: ', data);
       const res = await api.patch(`/api/admin/user/${data._id}`, data);
 
       dispatch({
@@ -126,24 +123,16 @@ const UserProvider = ({ children }) => {
     }
   }, []);
 
-  // TODO
-  const deleteUserAction = useCallback(async (id) => {
-    dispatch({
-      type: types.USER_START,
-    });
-
+  const logOut = useCallback(async () => {
     try {
-      // await mernDashApi.post(`/api/user/delete/${id}`);
-      dispatch({
-        type: types.USER_DELETE,
-        payload: id,
-      });
+      await api.post('/api/users/logout');
     } catch (error) {
       dispatch({
         type: types.USER_FAILURE,
         payload: error.response.error.message,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const addTradeAction = useCallback(async (data) => {
@@ -182,7 +171,7 @@ const UserProvider = ({ children }) => {
         fetchUsers,
         editUserAction,
         addTradeAction,
-        deleteUserAction,
+        logOut,
         UserReset,
       }}
     >

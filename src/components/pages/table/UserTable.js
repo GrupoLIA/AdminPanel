@@ -5,7 +5,8 @@ const columns = [
   {
     title: 'ID',
     dataIndex: '_id',
-    responsive: ['lg'],
+    responsive: ['md'],
+    width: '1%',
   },
   {
     title: 'email',
@@ -14,6 +15,17 @@ const columns = [
     render: (text, record) => <Link to={`/user/${record._id}`}>{text}</Link>,
     sortDirections: ['descend', 'ascend'],
     responsive: ['md'],
+    width: '1%',
+  },
+  {
+    title: 'location',
+    dataIndex: 'location',
+    sorter: (a, b) => a.location > b.location,
+    sortDirections: ['ascend', 'descend'],
+  },
+  {
+    title: 'Description',
+    dataIndex: 'profile_description',
   },
   {
     title: 'Telephones',
@@ -37,6 +49,7 @@ const UserTable = ({ data }) => (
       columns={columns}
       dataSource={data}
       style={{ clear: 'both' }}
+      rowkey="id"
     />
   </>
 );

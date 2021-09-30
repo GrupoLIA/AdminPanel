@@ -38,9 +38,7 @@ const AuthProvider = ({ children }) => {
     } catch (error) {
       dispatch({
         type: types.AUTH_FAILURE,
-        payload: error.isAxiosError
-          ? error.message
-          : error.response.data.error.message,
+        payload: 'Can not login',
       });
     }
   }, []);

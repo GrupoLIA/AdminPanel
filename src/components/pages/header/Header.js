@@ -6,21 +6,28 @@ import Avatar from 'antd/lib/avatar/avatar';
 import { UserOutlined } from '@ant-design/icons';
 
 const PageHeader = ({ history }) => {
-  const { state } = useContext(UserContext);
+  const { state, logOut } = useContext(UserContext);
   const { me } = state;
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await logOut();
     localStorage.clear();
     history.push('/login');
   };
 
   const menu = (
     <Menu>
-      <Menu.Item>
+      <Menu.Item key="1">
         <span onClick={() => handleLogout()}>Log out</span>
       </Menu.Item>
     </Menu>
   );
+
+  function capitalize(str) {
+    const lower = str.toLowerCase();
+
+    return str.charAt(0).toUpperCase() + lower.slice(1);
+  }
 
   return (
     <HeaderStyled>
@@ -35,8 +42,8 @@ const PageHeader = ({ history }) => {
                 <Avatar icon={<UserOutlined />} />
               </button>
             </Dropdown>
-            <Typography.Text>
-              {me ? me.email.split('@')[0] : 'Admin'}
+            <Typography.Text strong={true}>
+              {me ? capitalize(me.email.split('@')[0]) : 'Admin'}
             </Typography.Text>
           </div>
         </div>

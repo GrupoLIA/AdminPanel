@@ -1,5 +1,10 @@
 import { Layout, Menu, Typography } from 'antd';
-import { UserOutlined, HomeOutlined, SettingOutlined } from '@ant-design/icons';
+import {
+  UserOutlined,
+  HomeOutlined,
+  SettingOutlined,
+  FormOutlined,
+} from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import SidebarStyled from './SidebarStyled';
 
@@ -37,7 +42,12 @@ const Sidebar = ({ collapsed, index, loggedInUserId, toggle }) => (
             Users
           </Link>
         </Menu.Item>
-        <Menu.Item key="3" icon={<SettingOutlined />}>
+        <Menu.Item key="3" icon={<FormOutlined />}>
+          <Link className="text-white" to="/contracts">
+            Contracts
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="4" icon={<SettingOutlined />}>
           <Link to={`/user/${loggedInUserId}`}></Link>
           Account Settings
         </Menu.Item>

@@ -1,5 +1,4 @@
 import { useContext, useState, useEffect } from 'react';
-import { Typography, Popconfirm, Button } from 'antd';
 import { UserContext } from '../../../contexts/user/userContext';
 import DashboardHOC from '../dashboard/DashboardHOC';
 import UserStyled from './UserStyled';
@@ -8,13 +7,8 @@ import UserForm from '../forms/UserForm';
 import CustomLoader from '../../common/CustomLoader';
 
 const SingleUser = (props) => {
-  const {
-    state,
-    fetchSingleUser,
-    editUserAction,
-    deleteUserAction,
-    addTradeAction,
-  } = useContext(UserContext);
+  const { state, fetchSingleUser, editUserAction, addTradeAction } =
+    useContext(UserContext);
 
   const [tradeFormVisibility, settradeFormVisibility] = useState(false);
 
@@ -31,7 +25,8 @@ const SingleUser = (props) => {
 
   useEffect(() => {
     fetchSingleUser(id);
-  }, [fetchSingleUser, id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onFinish = (values) => {
     values._id = user._id;
@@ -40,34 +35,15 @@ const SingleUser = (props) => {
     editUserAction(values);
   };
 
-  const onConfirmDelete = () => {
-    deleteUserAction(id);
-    props.history.push('/users');
-  };
-
   return (
     <UserStyled>
       {user ? (
-        <>
-          <Typography>Edit {user.email}'s Profile</Typography>
-          <Popconfirm
-            title="Are you sure you want to delete this user?"
-            onConfirm={onConfirmDelete}
-            okText="Delete"
-            cancelText="Cancel"
-          >
-            <Button className="float-right" danger>
-              Delete {user.email}
-            </Button>
-          </Popconfirm>
-
-          <UserForm
-            user={user}
-            onFinish={onFinish}
-            addTradeModal={addTradeModal}
-            loading={loading}
-          />
-        </>
+        <UserForm
+          user={user}
+          onFinish={onFinish}
+          addTradeModal={addTradeModal}
+          loading={loading}
+        />
       ) : (
         <CustomLoader text={'Getting user data, please wait'} />
       )}

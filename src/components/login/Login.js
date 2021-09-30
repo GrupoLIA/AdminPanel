@@ -3,11 +3,13 @@ import { Form, notification, Input, Button, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { AuthContext } from '../../contexts/auth/authContext';
 import { UserContext } from '../../contexts/user/userContext';
+import { ContractContext } from '../../contexts/contract/contractContext';
 import checkAdminAuth from '../../utils/adminAuth';
 
 const Login = ({ history }) => {
   const { LoginAction, state, AuthReset } = useContext(AuthContext);
   const { fetchLoggedInUser, fetchUsers } = useContext(UserContext);
+  const { fetchContracts } = useContext(ContractContext);
   const { token, loading, error, errResponse } = state;
   const handleLogin = (values) => LoginAction(values);
 
@@ -30,6 +32,7 @@ const Login = ({ history }) => {
     if (checkAdminAuth(token)) {
       fetchLoggedInUser();
       fetchUsers();
+      fetchContracts();
       history.push('/');
     }
 

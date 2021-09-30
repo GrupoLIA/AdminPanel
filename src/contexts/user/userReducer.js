@@ -49,19 +49,6 @@ const userReducer = (state, action) => {
         message: 'Edited success',
       };
 
-    case types.USER_DELETE:
-      return {
-        ...state,
-        users: [
-          ...state.users.slice().filter((data) => data._id !== action.payload),
-        ],
-        loading: false,
-        error: false,
-        errResponse: '',
-        user: null,
-        message: 'Deleted successfully',
-      };
-
     case types.USER_ADD_TRADE:
       return {
         ...state,
